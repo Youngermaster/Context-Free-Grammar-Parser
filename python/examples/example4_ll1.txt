@@ -1,0 +1,7 @@
+1
+S -> aSb e
+aabb
+ab
+aaabbb
+aab
+

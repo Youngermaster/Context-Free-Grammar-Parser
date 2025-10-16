@@ -367,7 +367,7 @@ class SLR1Parser:
 
             # Look up action
             key = (current_state, current_input)
-            action = action_table.get(key, SLR1Action("error"))
+            action = self.action_table.get(key, SLR1Action("error"))
 
             if action.type == "accept":
                 return True
