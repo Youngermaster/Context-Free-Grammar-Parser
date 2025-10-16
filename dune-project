@@ -3,3 +3,6 @@
 (version 1.0.0)
 (authors "Juan Manuel Young Hoyos" "Santiago Restrepo" "Mateo Ardila")
 (license MIT)
+(generate_opam_files true)
+(documentation "https://github.com/Youngermaster/Context-Free-Grammar-Parser")
+(source (github Youngermaster/Context-Free-Grammar-Parser))

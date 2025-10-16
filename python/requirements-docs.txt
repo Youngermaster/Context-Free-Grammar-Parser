@@ -1,0 +1,2 @@
+# Documentation generation dependencies
+pdoc3>=0.10.0
