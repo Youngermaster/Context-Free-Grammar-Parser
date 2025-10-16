@@ -1,0 +1,5 @@
+(executable
+ (name main)
+ (modules main cli grammar firstFollow ll1 slr1 utils)
+ (libraries str)
+ (flags (:standard -w -32-27-33)))

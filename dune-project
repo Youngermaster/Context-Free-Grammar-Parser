@@ -1,0 +1,5 @@
+(lang dune 3.0)
+(name cfg_parser)
+(version 1.0.0)
+(authors "Juan Manuel Young Hoyos" "Santiago Restrepo" "Mateo Ardila")
+(license MIT)
