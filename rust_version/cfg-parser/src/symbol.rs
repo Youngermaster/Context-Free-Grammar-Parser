@@ -30,6 +30,7 @@ impl Symbol {
     ///
     /// # Examples
     /// ```
+    /// use cfg_parser::symbol::Symbol;
     /// let sym = Symbol::from_char('A'); // Nonterminal
     /// let sym = Symbol::from_char('a'); // Terminal
     /// let sym = Symbol::from_char('e'); // Epsilon
