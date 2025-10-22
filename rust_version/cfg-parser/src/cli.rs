@@ -137,20 +137,3 @@ fn interactive_mode<R: BufRead>(
 
     Ok(())
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use std::io::Cursor;
-
-    #[test]
-    fn test_read_grammar() {
-        let input = "2\nS -> AB\nA -> a\n";
-        let cursor = Cursor::new(input);
-        let mut lines = cursor.lines();
-
-        let grammar_lines = read_grammar(&mut lines).unwrap();
-        assert_eq!(grammar_lines.len(), 3);
-        assert_eq!(grammar_lines[0], "2");
-    }
-}

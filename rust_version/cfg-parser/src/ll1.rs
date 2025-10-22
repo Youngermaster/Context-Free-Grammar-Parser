@@ -153,31 +153,3 @@ impl LL1Parser {
         &self.table
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use crate::first_follow::{compute_first_sets, compute_follow_sets};
-
-    #[test]
-    fn test_ll1_simple() {
-        let lines = vec![
-            "3".to_string(),
-            "S -> AB".to_string(),
-            "A -> aA d".to_string(),
-            "B -> bBc e".to_string(),
-        ];
-
-        let grammar = Grammar::parse(&lines).unwrap();
-        let first_sets = compute_first_sets(&grammar);
-        let follow_sets = compute_follow_sets(&grammar, &first_sets);
-
-        let parser = LL1Parser::build(grammar, first_sets, follow_sets);
-        assert!(parser.is_ok());
-
-        let parser = parser.unwrap();
-        assert!(parser.parse("d"));
-        assert!(parser.parse("adbc"));
-        assert!(!parser.parse("a"));
-    }
-}

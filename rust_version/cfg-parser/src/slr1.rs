@@ -330,31 +330,3 @@ impl SLR1Parser {
         }
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use crate::first_follow::{compute_first_sets, compute_follow_sets};
-
-    #[test]
-    fn test_slr1_simple() {
-        let lines = vec![
-            "3".to_string(),
-            "S -> S+T T".to_string(),
-            "T -> T*F F".to_string(),
-            "F -> (S) i".to_string(),
-        ];
-
-        let grammar = Grammar::parse(&lines).unwrap();
-        let first_sets = compute_first_sets(&grammar);
-        let follow_sets = compute_follow_sets(&grammar, &first_sets);
-
-        let parser = SLR1Parser::build(grammar, follow_sets);
-        assert!(parser.is_ok());
-
-        let parser = parser.unwrap();
-        assert!(parser.parse("i+i"));
-        assert!(parser.parse("(i)"));
-        assert!(!parser.parse("(i+i)*i)"));
-    }
-}

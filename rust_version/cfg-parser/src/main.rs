@@ -15,14 +15,7 @@
 //! Aho, Alfred V. et al. "Compilers: Principles, Techniques, and Tools" (2nd Edition).
 //! Addison-Wesley, 2006.
 
-mod cli;
-mod error;
-mod first_follow;
-mod grammar;
-mod ll1;
-mod slr1;
-mod symbol;
-
+use cfg_parser::cli;
 use std::process;
 
 fn main() {

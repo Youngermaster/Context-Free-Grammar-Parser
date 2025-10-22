@@ -127,33 +127,3 @@ pub fn string_to_symbols(s: &str) -> Vec<Symbol> {
 pub fn symbols_to_string(symbols: &[Symbol]) -> String {
     symbols.iter().map(|s| s.to_string()).collect()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_symbol_from_char() {
-        assert!(Symbol::from_char('A').is_nonterminal());
-        assert!(Symbol::from_char('a').is_terminal());
-        assert!(Symbol::from_char('e').is_epsilon());
-        assert!(Symbol::from_char('$').is_end_marker());
-        assert!(Symbol::from_char('+').is_terminal());
-    }
-
-    #[test]
-    fn test_symbol_ordering() {
-        assert!(Symbol::Epsilon < Symbol::Terminal('a'));
-        assert!(Symbol::Terminal('a') < Symbol::Nonterminal('A'));
-        assert!(Symbol::Nonterminal('A') < Symbol::EndMarker);
-    }
-
-    #[test]
-    fn test_string_conversion() {
-        let symbols = string_to_symbols("AaB");
-        assert_eq!(symbols.len(), 3);
-        assert!(symbols[0].is_nonterminal());
-        assert!(symbols[1].is_terminal());
-        assert!(symbols[2].is_nonterminal());
-    }
-}

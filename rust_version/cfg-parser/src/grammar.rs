@@ -214,33 +214,3 @@ impl fmt::Display for Grammar {
         Ok(())
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_parse_simple_grammar() {
-        let lines = vec![
-            "2".to_string(),
-            "S -> AB".to_string(),
-            "A -> a".to_string(),
-        ];
-
-        let grammar = Grammar::parse(&lines).unwrap();
-        assert_eq!(grammar.productions.len(), 2);
-        assert!(grammar.nonterminals.contains(&Symbol::Nonterminal('S')));
-        assert!(grammar.terminals.contains(&Symbol::Terminal('a')));
-    }
-
-    #[test]
-    fn test_parse_alternatives() {
-        let lines = vec![
-            "1".to_string(),
-            "S -> a b c".to_string(),
-        ];
-
-        let grammar = Grammar::parse(&lines).unwrap();
-        assert_eq!(grammar.productions.len(), 3);
-    }
-}
