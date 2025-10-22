@@ -128,8 +128,7 @@ impl Grammar {
         }
 
         // Extract all nonterminals from LHS
-        let lhs_nonterminals: HashSet<Symbol> =
-            productions.iter().map(|p| p.lhs).collect();
+        let lhs_nonterminals: HashSet<Symbol> = productions.iter().map(|p| p.lhs).collect();
 
         // Extract all symbols from RHS
         let mut rhs_symbols = HashSet::new();

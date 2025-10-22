@@ -28,7 +28,9 @@ pub enum GrammarError {
     #[error("SLR(1) Shift/Reduce conflict at state {state}, symbol {symbol}")]
     SLR1ShiftReduceConflict { state: usize, symbol: String },
 
-    #[error("SLR(1) Reduce/Reduce conflict at state {state}, symbol {symbol}:\n  {prod1}\n  {prod2}")]
+    #[error(
+        "SLR(1) Reduce/Reduce conflict at state {state}, symbol {symbol}:\n  {prod1}\n  {prod2}"
+    )]
     SLR1ReduceReduceConflict {
         state: usize,
         symbol: String,

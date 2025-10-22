@@ -27,11 +27,7 @@ impl LL1Parser {
     /// 2. If ε ∈ FIRST(α), for each b in FOLLOW(A), add A → α to M[A, b]
     ///
     /// If any cell has multiple entries, the grammar is not LL(1).
-    pub fn build(
-        grammar: Grammar,
-        first_sets: FirstSets,
-        follow_sets: FollowSets,
-    ) -> Result<Self> {
+    pub fn build(grammar: Grammar, first_sets: FirstSets, follow_sets: FollowSets) -> Result<Self> {
         let mut table: HashMap<(Symbol, Symbol), Production> = HashMap::new();
 
         for production in grammar.all_productions() {

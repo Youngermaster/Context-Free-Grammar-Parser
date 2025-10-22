@@ -70,8 +70,7 @@ impl SLR1Parser {
         let start_production = Production::new(augmented_start, vec![start]);
 
         // Build LR(0) automaton
-        let (states, transitions) =
-            Self::build_lr0_automaton(&grammar, &start_production);
+        let (states, transitions) = Self::build_lr0_automaton(&grammar, &start_production);
 
         // Build ACTION and GOTO tables
         let (action_table, goto_table) = Self::build_tables(
@@ -129,8 +128,7 @@ impl SLR1Parser {
         for item in items {
             if let Some(sym) = item.symbol_after_dot() {
                 if sym == symbol {
-                    let new_item =
-                        Item::new(item.production.clone(), item.dot_position + 1);
+                    let new_item = Item::new(item.production.clone(), item.dot_position + 1);
                     moved.insert(new_item);
                 }
             }
@@ -206,9 +204,7 @@ impl SLR1Parser {
                     // Shift items: [A → α•aβ] where a is terminal
                     if let Some(symbol) = item.symbol_after_dot() {
                         if symbol.is_terminal() || symbol.is_end_marker() {
-                            if let Some(&next_state) =
-                                transitions.get(&(state_id, symbol))
-                            {
+                            if let Some(&next_state) = transitions.get(&(state_id, symbol)) {
                                 let key = (state_id, symbol);
                                 if action_table.contains_key(&key) {
                                     return Err(GrammarError::SLR1ShiftReduceConflict {
@@ -239,28 +235,23 @@ impl SLR1Parser {
                             if let Some(existing) = action_table.get(&key) {
                                 match existing {
                                     Action::Shift(_) => {
-                                        return Err(
-                                            GrammarError::SLR1ShiftReduceConflict {
-                                                state: state_id,
-                                                symbol: symbol.to_string(),
-                                            },
-                                        );
+                                        return Err(GrammarError::SLR1ShiftReduceConflict {
+                                            state: state_id,
+                                            symbol: symbol.to_string(),
+                                        });
                                     }
                                     Action::Reduce(other_prod) => {
-                                        return Err(
-                                            GrammarError::SLR1ReduceReduceConflict {
-                                                state: state_id,
-                                                symbol: symbol.to_string(),
-                                                prod1: other_prod.to_string(),
-                                                prod2: item.production.to_string(),
-                                            },
-                                        );
+                                        return Err(GrammarError::SLR1ReduceReduceConflict {
+                                            state: state_id,
+                                            symbol: symbol.to_string(),
+                                            prod1: other_prod.to_string(),
+                                            prod2: item.production.to_string(),
+                                        });
                                     }
                                     Action::Accept => {}
                                 }
                             } else {
-                                action_table
-                                    .insert(key, Action::Reduce(item.production.clone()));
+                                action_table.insert(key, Action::Reduce(item.production.clone()));
                             }
                         }
                     }

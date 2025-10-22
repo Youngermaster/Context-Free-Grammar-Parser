@@ -59,7 +59,10 @@ fn read_grammar<R: BufRead>(lines: &mut io::Lines<R>) -> Result<Vec<String>> {
 
     // Read first line (number of nonterminals)
     let n_str = lines.next().ok_or_else(|| {
-        io::Error::new(io::ErrorKind::UnexpectedEof, "Expected number of nonterminals")
+        io::Error::new(
+            io::ErrorKind::UnexpectedEof,
+            "Expected number of nonterminals",
+        )
     })??;
 
     let n = n_str

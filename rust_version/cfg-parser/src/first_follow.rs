@@ -53,8 +53,7 @@ pub fn compute_first_sets(grammar: &Grammar) -> FirstSets {
             let rhs_first = first_of_string(&first_sets, &production.rhs);
 
             // Union with current FIRST set
-            let new_first: HashSet<Symbol> =
-                current_first.union(&rhs_first).copied().collect();
+            let new_first: HashSet<Symbol> = current_first.union(&rhs_first).copied().collect();
 
             if new_first.len() != current_first.len() {
                 first_sets.insert(lhs, new_first);
